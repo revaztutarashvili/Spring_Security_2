@@ -16,10 +16,10 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(@RequestParam("username") String userName,
-                        @RequestParam("Password") String password,
+                        @RequestParam("password") String password,
                         HttpServletRequest request){
 
-        if (userName.equals("Revaz") && password.equals("password")){
+        if (userName.equals("revaz") && password.equals("password")){
             HttpSession session = request.getSession();
             session.setAttribute("isAuthenticated", Boolean.TRUE);
             session.setAttribute("role", UserRole.ADMIN);
