@@ -10,8 +10,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-
+@RestController
 public class MainController {
 
     @PostMapping("/login")
@@ -19,10 +20,10 @@ public class MainController {
                         @RequestParam("password") String password,
                         HttpServletRequest request){
 
-        if (userName.equals("revaz") && password.equals("password")){
+        if (userName.equals("revaz") && password.equals("password1")){
             HttpSession session = request.getSession();
             session.setAttribute("isAuthenticated", Boolean.TRUE);
-            session.setAttribute("role", UserRole.ADMIN);
+            session.setAttribute("role", UserRole.ADMIN.name());
             session.setAttribute("username",userName);
         }
         return "success";
