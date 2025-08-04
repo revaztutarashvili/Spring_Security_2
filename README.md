@@ -1,8 +1,10 @@
 # Describtion:
-- ## this is Spring security Object app, where i have Login based interface. 
+- ## this is Spring security Object app 
   ## main thing is to :
-    - check user role (ADMIN, USER) to access login and sign up
-    - cheeck authentication and authorisation. 
+    - check user role (ADMIN, USER) to access relevant endpoints
+    - check authentication and authorisation.
+    - session timeout limit is 30 sec
+    - 
     ## Topics:
     - Authentication
     - SecurityContextHolder

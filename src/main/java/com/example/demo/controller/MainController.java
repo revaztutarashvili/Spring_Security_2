@@ -20,11 +20,17 @@ public class MainController {
                         @RequestParam("password") String password,
                         HttpServletRequest request){
 
-        if (userName.equals("revaz") && password.equals("password1")){
+        if (userName.equals("admin") && password.equals("password")){
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30);
             session.setAttribute("isAuthenticated", Boolean.TRUE);
             session.setAttribute("role", UserRole.ADMIN.name());
+            session.setAttribute("username",userName);
+        }else if (userName.equals("user") && password.equals("password")) { // დაამატეთ ეს ბლოკი
+            HttpSession session = request.getSession();
+            session.setMaxInactiveInterval(30);
+            session.setAttribute("isAuthenticated", Boolean.TRUE);
+            session.setAttribute("role", UserRole.USER.name());
             session.setAttribute("username",userName);
         }
         return "success";
@@ -42,5 +48,20 @@ public class MainController {
         authentication.getFirstName();
 
         return name;
+    }
+
+    @GetMapping("/info")
+    public String getInfo() {
+        return "This info is for ALL authenticated users (ADMIN and USER).";
+    }
+
+    @GetMapping("/user/data")
+    public String getUserData() {
+        return "This is sensitive data accessible only by USER role.";
+    }
+
+    @GetMapping("/admin/panel")
+    public String getAdminPanel() {
+        return "Welcome to the ADMIN panel! Access is strictly for ADMIN role.";
     }
 }

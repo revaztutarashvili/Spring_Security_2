@@ -16,8 +16,13 @@ public class SecurityConfig {
     @Qualifier("UsernameAuthenticationFilter")OncePerRequestFilter authenticationProcessingFilter) throws Exception{
         httpSecurity
                 .addFilterBefore(authenticationProcessingFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests(x ->x.requestMatchers("/login").permitAll().anyRequest().authenticated())
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(x ->x
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/info", "/hello").authenticated()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/user/**").hasRole("USER")
+                .anyRequest().denyAll());
         return httpSecurity.build();
     }
 }
