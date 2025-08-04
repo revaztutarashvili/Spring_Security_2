@@ -1,6 +1,7 @@
 package com.example.demo.security;
 
 import com.example.demo.enums.UserRole;
+import lombok.Getter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
@@ -14,6 +15,8 @@ public class CustomAuthentication implements Authentication {
     private boolean authenticated;
 
     private final UserRole role;
+    @Getter
+    private String firstName;
 
 
     public CustomAuthentication(String userName, boolean isAuthenticated, UserRole role) {
